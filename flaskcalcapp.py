@@ -19,5 +19,5 @@ def predict():
     result = basic_calc(a, b, operation)
     return render_template("index2.html", prediction_text=str(result))
 
-app.run(host="0.0.0.0", port=80, debug=True)
+app.run(host="0.0.0.0", port=8080, debug=True)
 
