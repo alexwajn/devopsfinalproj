@@ -2,7 +2,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Deployment Tutorial 1</title>
+  <title>Basic Calculator by Alex!</title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
@@ -15,9 +15,9 @@
  <div class="login">
 	<h1>Basic Calculator  v0.1 by Alex W.</h1>
 
-     <!-- Main Input For Receiving Query to our ML -->
+     
 
-    <form action="{{ url_for('predict')}}"method="post">
+    <form action="{{ url_for('show_res')}}"method="post">
         <input type="text" name="a" placeholder="Enter the first number" required="required" />
         <input type="text" name="b" placeholder="Enter the second number" required="required" />
         
@@ -43,7 +43,7 @@
 
    <br>
    <br>
-   {{ prediction_text }}
+   {{ show_result }}
 
  </div>
 </body>

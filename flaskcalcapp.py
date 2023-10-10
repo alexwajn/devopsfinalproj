@@ -8,8 +8,8 @@ from basiccalc import basic_calc
 def home():
     return render_template("index2.html")
     
-@app.route("/predict", methods=["POST"])
-def predict():
+@app.route("/show_res", methods=["POST"])
+def show_res():
     
     a = request.form['a']
     b = request.form['b']
@@ -17,7 +17,7 @@ def predict():
     print("Operation:______",operation)
     
     result = basic_calc(a, b, operation)
-    return render_template("index2.html", prediction_text=str(result))
+    return render_template("index2.html", show_result=str(result))
 
-app.run(host="0.0.0.0", port=8080, debug=True)
+
 
