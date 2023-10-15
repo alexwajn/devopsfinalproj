@@ -14,4 +14,8 @@ elem = driver.find_element(By.ID, "subs")
 elem.click()
 
 elem.send_keys(Keys.RETURN)
-#driver.close()
+
+elem = driver.find_element(By.NAME, "result")
+print(elem.get_attribute('innerHTML'))
+
+driver.close()
