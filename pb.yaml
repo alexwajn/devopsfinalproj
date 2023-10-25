@@ -1,0 +1,11 @@
+---
+- hosts: testgroup
+  become: true
+  become_method: sudo
+  become_user: root
+  tasks:
+
+    - name: Say Hello
+      ansible.builtin.debug:
+        msg: Hello World
+
