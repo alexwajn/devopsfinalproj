@@ -2,10 +2,20 @@
 - hosts: testgroup
   become: true
   become_method: sudo
-  become_user: root
+  become_user: ubuntu
   tasks:
 
     - name: Say Hello
       ansible.builtin.debug:
         msg: Hello World
+        
+    - name: Send TAR file
+      ansible.builtin.copy:
+        src: /var/lib/jenkins/workspace/FinalProjPL/finaldevops.tar
+        dest: /home/ubuntu/finaldevops.tar
+    
+
+    
+    
+
 
