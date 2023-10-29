@@ -16,7 +16,7 @@
 
     - name: Unpack TAR file
       ansible.builtin.shell:
-        cmd: sudo docker load finaldevops.tar
+        cmd: sudo docker load < finaldevops.tar
 
     - name: Deploy image
       ansible.builtin.shell:
