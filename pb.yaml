@@ -13,6 +13,14 @@
       ansible.builtin.copy:
         src: /var/lib/jenkins/workspace/FinalDOProj/finaldevops.tar
         dest: /home/ubuntu/finaldevops.tar
+
+    - name: Unpack TAR file
+      ansible.builtin.shell:
+        cmd: sudo docker load finaldevops.tar
+
+    - name: Deploy image
+      ansible.builtin.shell:
+        cmd: sudo docker run -dp 5000:5000 finaldevops:latest
     
 
     
