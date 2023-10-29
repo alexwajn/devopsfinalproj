@@ -11,7 +11,7 @@
         
     - name: Send TAR file
       ansible.builtin.copy:
-        src: /var/lib/jenkins/workspace/FinalProjPL/finaldevops.tar
+        src: /var/lib/jenkins/workspace/FinalDOProj/finaldevops.tar
         dest: /home/ubuntu/finaldevops.tar
     
 
