@@ -1,0 +1,37 @@
+---
+- hosts: testgroup
+  become: true
+  become_method: sudo
+  become_user: ubuntu
+  tasks:
+
+    - name: Say Hello
+      ansible.builtin.debug:
+        msg: Hello World
+        
+    - name: Send TAR file
+      ansible.builtin.copy:
+        src: /var/lib/jenkins/workspace/FinalDOProj/finaldevops.tar
+        dest: /home/ubuntu/finaldevops.tar
+
+    - name: Kill current conteiners
+      ansible.builtin.shell:
+        cmd: sudo docker kill $(sudo docker ps -q)
+
+    - name: Remove current images
+      ansible.builtin.shell:
+        cmd: sudo docker rmi $(sudo docker images -q) --force
+        
+    - name: Unpack TAR file
+      ansible.builtin.shell:
+        cmd: sudo docker load < finaldevops.tar
+
+    - name: Deploy image
+      ansible.builtin.shell:
+        cmd: sudo docker run -dp 5000:5000 finaldevops:latest
+    
+
+    
+    
+
+
