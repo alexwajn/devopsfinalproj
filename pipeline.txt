@@ -2,15 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Clean Workspace') {
-            steps {
-                sh 'sudo rm -r /var/lib/jenkins/workspace/FinalDOProj/'
-            }
-        }
-        
         stage('Fetch from GH') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/alexwajn/devopsfinalproj.git']])
+                checkout scmGit(branches: [[name: '*/main']], 
+                extensions: [], 
+                userRemoteConfigs: [[url: 'https://github.com/alexwajn/devopsfinalproj.git']])
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'python3 -m pytest'
             }
         }
         stage('Dockerize') {
@@ -25,15 +26,19 @@ pipeline {
         }
         stage('Run Ansible PB') {
             steps {
-                ansiblePlaybook become: true, becomeUser: 'ubuntu', credentialsId: 'awsconn', installation: 'ansibledef', inventory: '/var/lib/jenkins/workspace/FinalDOProj/inventory', playbook: '/var/lib/jenkins/workspace/FinalDOProj/pb.yaml', vaultTmpPath: ''
-                
+                ansiblePlaybook become: true, 
+                becomeUser: 'ubuntu', 
+                credentialsId: 'awsconn', 
+                installation: 'ansibledef', 
+                inventory: '/var/lib/jenkins/workspace/FinalDOProj/inventory', 
+                playbook: '/var/lib/jenkins/workspace/FinalDOProj/pb-init.yaml', 
+                vaultTmpPath: ''
             }
         }
-        stage('Test') {
+        stage('Clean Workspace') {
             steps {
-            sh 'python3 '
-
+                sh 'sudo rm -rf /var/lib/jenkins/workspace/FinalDOProj/*'
             }
-        }       
+        }
     }
 }
